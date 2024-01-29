@@ -1,0 +1,76 @@
+[gd_scene load_steps=2 format=3 uid="uid://nakghjpyqj8t"]
+
+[ext_resource type="Script" path="res://Menubar.gd" id="1_68se7"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_68se7")
+
+[node name="MenuBar" type="MenuBar" parent="CanvasLayer/Control"]
+custom_minimum_size = Vector2(96, 32)
+layout_mode = 0
+offset_right = 96.0
+offset_bottom = 40.0
+tooltip_text = "File"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/MenuBar"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="File" type="MenuButton" parent="CanvasLayer/Control/MenuBar/HBoxContainer"]
+layout_mode = 2
+text = "File"
+switch_on_hover = true
+
+[node name="Load" type="FileDialog" parent="CanvasLayer/Control/MenuBar/HBoxContainer/File"]
+title = "Load Level"
+initial_position = 1
+size = Vector2i(720, 480)
+ok_button_text = "Open"
+cancel_button_text = "Nevermind"
+mode_overrides_title = false
+file_mode = 0
+access = 2
+
+[node name="Save" type="FileDialog" parent="CanvasLayer/Control/MenuBar/HBoxContainer/File"]
+title = "Save Level"
+initial_position = 1
+size = Vector2i(720, 480)
+ok_button_text = "Save"
+cancel_button_text = "Nevermind"
+access = 2
+
+[node name="New" type="ConfirmationDialog" parent="CanvasLayer/Control/MenuBar/HBoxContainer/File"]
+title = "New Level?"
+initial_position = 1
+size = Vector2i(647, 80)
+cancel_button_text = "Nevermind"
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/MenuBar/HBoxContainer/File/New"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Are you sure you want to make a new level? (Any progressed not saved will be lost)"
+horizontal_alignment = 1
+
+[node name="Edit" type="MenuButton" parent="CanvasLayer/Control/MenuBar/HBoxContainer"]
+layout_mode = 2
+text = "Edit"
+switch_on_hover = true
+
+[node name="View" type="MenuButton" parent="CanvasLayer/Control/MenuBar/HBoxContainer"]
+layout_mode = 2
+text = "View"
+switch_on_hover = true
+
+[node name="Options" type="MenuButton" parent="CanvasLayer/Control/MenuBar/HBoxContainer"]
+layout_mode = 2
+text = "Options"
+switch_on_hover = true
