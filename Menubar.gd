@@ -123,10 +123,10 @@ func _MenuBar():
 	
 	#region VIEW
 	
-	MenuView.get_popup().add_item(" ")
-	MenuView.get_popup().add_item(" ")
-	MenuView.get_popup().add_item(" ")
-	MenuView.get_popup().add_item(" ")
+	MenuView.get_popup().add_item("                                        |")
+	MenuView.get_popup().add_item("                                        |")
+	MenuView.get_popup().add_item("                                        |")
+	MenuView.get_popup().add_item("                                        |")
 	
 	#region MODE
 	SMenuMode.set_name("Mode")
@@ -152,15 +152,30 @@ func _MenuBar():
 	
 	#endregion
 	
+	var BCString = " Show Barycenters"
+	var AVString = " Show Angles and Velocities"
+	var GEString = " Show Gravitational Affectors"
+	var LBString = " Show Level Bounds"
+	
+	var BC = Label.new()
+	var AV = Label.new()
+	var GE = Label.new()
+	var LB = Label.new()
+	BC.text = BCString
+	AV.text = AVString
+	GE.text = GEString
+	LB.text = LBString
+	
 	VBC.set_name("VBC")
 	MenuView.get_popup().add_child(VBC)
-	BCbox.set_name("Show Barycenters")
+	BCbox.set_name(BCString)
+	BCbox.text = BCString
 	VBC.add_child(BCbox)
-	AVbox.set_name("Show Angles and Velocities")
+	AVbox.set_name(AVString)
 	VBC.add_child(AVbox)
-	GEbox.set_name("Show Gravitational Affectors")
+	GEbox.set_name(GEString)
 	VBC.add_child(GEbox)
-	LBbox.set_name("Show Level Bounds")
+	LBbox.set_name(LBString)
 	VBC.add_child(LBbox)
 	
 	#endregion
