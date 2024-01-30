@@ -13,11 +13,6 @@ extends Control
 @onready var SMenuMode = PopupMenu.new()
 @onready var SsMenuSpec = PopupMenu.new()
 @onready var SsMenuSim = PopupMenu.new()
-@onready var VBC = VBoxContainer.new()
-@onready var BCbox = CheckBox.new()
-@onready var AVbox = CheckBox.new()
-@onready var GEbox = CheckBox.new()
-@onready var LBbox = CheckBox.new()
 #endregion
 
 #region SHORTPATHS
@@ -122,12 +117,6 @@ func _MenuBar():
 	#endregion
 	
 	#region VIEW
-	
-	MenuView.get_popup().add_item("                                        |")
-	MenuView.get_popup().add_item("                                        |")
-	MenuView.get_popup().add_item("                                        |")
-	MenuView.get_popup().add_item("                                        |")
-	
 	#region MODE
 	SMenuMode.set_name("Mode")
 	SMenuMode.add_item("Edit")
@@ -152,31 +141,10 @@ func _MenuBar():
 	
 	#endregion
 	
-	var BCString = " Show Barycenters"
-	var AVString = " Show Angles and Velocities"
-	var GEString = " Show Gravitational Affectors"
-	var LBString = " Show Level Bounds"
-	
-	var BC = Label.new()
-	var AV = Label.new()
-	var GE = Label.new()
-	var LB = Label.new()
-	BC.text = BCString
-	AV.text = AVString
-	GE.text = GEString
-	LB.text = LBString
-	
-	VBC.set_name("VBC")
-	MenuView.get_popup().add_child(VBC)
-	BCbox.set_name(BCString)
-	BCbox.text = BCString
-	VBC.add_child(BCbox)
-	AVbox.set_name(AVString)
-	VBC.add_child(AVbox)
-	GEbox.set_name(GEString)
-	VBC.add_child(GEbox)
-	LBbox.set_name(LBString)
-	VBC.add_child(LBbox)
+	MenuView.get_popup().add_check_item("Show Barycenters")
+	MenuView.get_popup().add_check_item("Show Angles and Velocities")
+	MenuView.get_popup().add_check_item("Show Gravitational Affectors")
+	MenuView.get_popup().add_check_item("Show Level Bounds")
 	
 	#endregion
 	
