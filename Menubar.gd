@@ -10,6 +10,14 @@ extends Control
 @onready var SsMenuTrans = PopupMenu.new()
 @onready var SsMenuScale = PopupMenu.new()
 @onready var SsMenuType = OptionButton.new()
+@onready var SMenuMode = PopupMenu.new()
+@onready var SsMenuSpec = PopupMenu.new()
+@onready var SsMenuSim = PopupMenu.new()
+@onready var VBC = VBoxContainer.new()
+@onready var BCbox = CheckBox.new()
+@onready var AVbox = CheckBox.new()
+@onready var GEbox = CheckBox.new()
+@onready var LBbox = CheckBox.new()
 #endregion
 
 #region SHORTPATHS
@@ -67,6 +75,7 @@ func _MenuBar():
 	SMenuObject.set_name("Object")
 	SMenuObject.add_item(" ") #ugly workaround for Edit/Object/Type options item because im still learning i know but if it works it works
 	SMenuObject.add_item("Angle")
+	SMenuObject.add_item("Velocity")
 	
 	#region TRANSFORM
 	#adds Trasnform SubSubMenu
@@ -110,6 +119,50 @@ func _MenuBar():
 	
 	MenuEdit.get_popup().add_item("Create")
 	MenuEdit.get_popup().add_item("Delete")
+	#endregion
+	
+	#region VIEW
+	
+	MenuView.get_popup().add_item(" ")
+	MenuView.get_popup().add_item(" ")
+	MenuView.get_popup().add_item(" ")
+	MenuView.get_popup().add_item(" ")
+	
+	#region MODE
+	SMenuMode.set_name("Mode")
+	SMenuMode.add_item("Edit")
+	MenuView.get_popup().add_child(SMenuMode)
+	MenuView.get_popup().add_submenu_item("Mode","Mode")
+	
+	#region SPECTATE
+	SsMenuSpec.set_name("Spectate")
+	SsMenuSpec.add_item("Original")
+	SsMenuSpec.add_item("Astronomical Leap")
+	SMenuMode.add_child(SsMenuSpec)
+	SMenuMode.add_submenu_item("Spectate","Spectate")
+	#endregion
+	
+	#region SIMULATE
+	SsMenuSim.set_name("Simulate")
+	SsMenuSim.add_item("Original")
+	SsMenuSim.add_item("Astronomical Leap")
+	SMenuMode.add_child(SsMenuSim)
+	SMenuMode.add_submenu_item("Simulate","Simulate")
+	#endregion
+	
+	#endregion
+	
+	VBC.set_name("VBC")
+	MenuView.get_popup().add_child(VBC)
+	BCbox.set_name("Show Barycenters")
+	VBC.add_child(BCbox)
+	AVbox.set_name("Show Angles and Velocities")
+	VBC.add_child(AVbox)
+	GEbox.set_name("Show Gravitational Affectors")
+	VBC.add_child(GEbox)
+	LBbox.set_name("Show Level Bounds")
+	VBC.add_child(LBbox)
+	
 	#endregion
 	
 	MenuFile.get_popup().connect("id_pressed", _on_File_item_pressed)
