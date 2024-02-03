@@ -2,7 +2,7 @@ extends Control
 # Called when the node enters the scene tree for the first time.
 
 #region VARIABLES
-@onready var Godot = true
+@onready var Godot = true #debugging var
 #endregion
 
 #region .NEW()
@@ -23,7 +23,14 @@ extends Control
 #endregion
 
 func _ready():
-	_MenuBar()
+	_MenuBar()#handles menu bar init doing it in code because thats what the tutorials show lol
+	
+	MenuFile.get_popup().connect("id_pressed", _on_File_item_pressed)
+	MenuEdit.get_popup().connect("id_pressed", _on_Edit_item_pressed)
+	MenuView.get_popup().connect("id_pressed", _on_View_item_pressed)
+	MenuOptions.get_popup().connect("id_pressed", _on_Opt_item_pressed)
+	
+	#$MenuBar/HBoxContainer/Edit/Object.get_popup().connect("id_pressed", _on_Object_Smenu_Edit_pressed)
 
 func _on_File_item_pressed(id):
 	if (Godot == true): print(id, " File Menu Child")
@@ -45,25 +52,19 @@ func _on_File_item_pressed(id):
 func _on_Edit_item_pressed(id):
 	if (Godot == true): print(id, " Edit Menu Child")
 
+func _on_View_item_pressed(id):
+	pass
+	
+func _on_Opt_item_pressed(id):
+	pass
+	
 func _on_Object_Smenu_Edit_pressed(id):
 	if (Godot == true): print(id, " Edit/Object Menu Child")
 	
 func _MenuBar():
 	
-	#region FILE
-	#adds the Options to the File button
-	MenuFile.get_popup().add_item("New")
-	MenuFile.get_popup().add_item("Load")
-	MenuFile.get_popup().add_item("Save")
-	MenuFile.get_popup().add_item("Quit")
-	#endregion
-	
 	#region EDIT
 	#adds the Options to the Edit button
-	MenuEdit.get_popup().add_item("Undo")
-	MenuEdit.get_popup().add_item("Redo")
-	MenuEdit.get_popup().add_item("Copy")
-	MenuEdit.get_popup().add_item("Paste")
 	
 	#region OBJECT
 	#adds the Options to the Object Submenu
@@ -112,8 +113,6 @@ func _MenuBar():
 	SMenuObject.add_submenu_item("Scale","Scale")
 	#endregion
 	
-	MenuEdit.get_popup().add_item("Create")
-	MenuEdit.get_popup().add_item("Delete")
 	#endregion
 	
 	#region VIEW
@@ -138,17 +137,5 @@ func _MenuBar():
 	SMenuMode.add_child(SsMenuSim)
 	SMenuMode.add_submenu_item("Simulate","Simulate")
 	#endregion
-	
 	#endregion
-	
-	MenuView.get_popup().add_check_item("Show Barycenters")
-	MenuView.get_popup().add_check_item("Show Angles and Velocities")
-	MenuView.get_popup().add_check_item("Show Gravitational Affectors")
-	MenuView.get_popup().add_check_item("Show Level Bounds")
-	
 	#endregion
-	
-	MenuFile.get_popup().connect("id_pressed", _on_File_item_pressed)
-	MenuEdit.get_popup().connect("id_pressed", _on_Edit_item_pressed)
-	
-	#$MenuBar/HBoxContainer/Edit/Object.get_popup().connect("id_pressed", _on_Object_Smenu_Edit_pressed)

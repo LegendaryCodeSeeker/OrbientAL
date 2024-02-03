@@ -29,6 +29,15 @@ offset_bottom = 40.0
 layout_mode = 2
 text = "File"
 switch_on_hover = true
+item_count = 4
+popup/item_0/text = "New"
+popup/item_0/id = 0
+popup/item_1/text = "Load"
+popup/item_1/id = 1
+popup/item_2/text = "Open"
+popup/item_2/id = 2
+popup/item_3/text = "Quit"
+popup/item_3/id = 3
 
 [node name="Load" type="FileDialog" parent="CanvasLayer/Control/MenuBar/HBoxContainer/File"]
 title = "Load Level"
@@ -64,11 +73,40 @@ horizontal_alignment = 1
 layout_mode = 2
 text = "Edit"
 switch_on_hover = true
+item_count = 6
+popup/item_0/text = "Undo"
+popup/item_0/id = 0
+popup/item_1/text = "Redo"
+popup/item_1/id = 1
+popup/item_2/text = "Copy"
+popup/item_2/id = 2
+popup/item_3/text = "Paste"
+popup/item_3/id = 3
+popup/item_4/text = "Create"
+popup/item_4/id = 4
+popup/item_5/text = "Delete"
+popup/item_5/id = 5
 
 [node name="View" type="MenuButton" parent="CanvasLayer/Control/MenuBar/HBoxContainer"]
 layout_mode = 2
 text = "View"
 switch_on_hover = true
+item_count = 4
+popup/item_0/text = "Show Barycenters"
+popup/item_0/checkable = 1
+popup/item_0/checked = true
+popup/item_0/id = 0
+popup/item_1/text = "Show Angles And Velocities"
+popup/item_1/checkable = 1
+popup/item_1/id = 1
+popup/item_2/text = "Show Gravitational Affectors"
+popup/item_2/checkable = 1
+popup/item_2/checked = true
+popup/item_2/id = 2
+popup/item_3/text = "Show Level Bounds"
+popup/item_3/checkable = 1
+popup/item_3/checked = true
+popup/item_3/id = 3
 
 [node name="Options" type="MenuButton" parent="CanvasLayer/Control/MenuBar/HBoxContainer"]
 layout_mode = 2
