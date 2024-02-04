@@ -69,7 +69,8 @@ func _MenuBar():
 	#region OBJECT
 	#adds the Options to the Object Submenu
 	SMenuObject.set_name("Object")
-	SMenuObject.add_item(" ") #ugly workaround for Edit/Object/Type options item because im still learning i know but if it works it works
+	SMenuObject.add_item(" ")
+	SMenuObject.set_item_disabled(0, true) #ugly workaround for Edit/Object/Type options item because im still learning i know but if it works it works
 	SMenuObject.add_item("Angle")
 	SMenuObject.add_item("Velocity")
 	
