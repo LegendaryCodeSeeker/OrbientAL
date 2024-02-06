@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://nakghjpyqj8t"]
 
-[ext_resource type="Script" path="res://Menubar.gd" id="1_68se7"]
+[ext_resource type="Script" path="res://scripts/Menubar.gd" id="1_y8s3i"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -11,7 +11,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("1_68se7")
+script = ExtResource("1_y8s3i")
 
 [node name="MenuBar" type="MenuBar" parent="CanvasLayer/Control"]
 custom_minimum_size = Vector2(96, 32)
