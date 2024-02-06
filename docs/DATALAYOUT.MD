@@ -6,7 +6,7 @@ Orbient:
 	next 4 bytes: level height (float)
 	next 8 bytes: level creation date(64int unix time)
 	next 4 bytes: level object count (unsigned int)
-	next 4 bytes: buffer
+	next 4 bytes: buffer(signature 2)
 
 	Object:
 	next byte: ID (unsigned int)
