@@ -1,15 +1,5 @@
 extends Node
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass# Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 func _find_level_type(dir):
 	var Level = FileAccess.open(dir, FileAccess.READ)
 	var LL = Level.get_length() / 16
@@ -33,23 +23,24 @@ func _process_OLD(dir):
 	var _objectCount = _data.slice(24, 28)
 	
 	_levelWidth.reverse()
-	_levelWidth = _levelWidth.decode_float(0)
 	_levelHeight.reverse()
-	_levelHeight = _levelHeight.decode_float(0)
 	_levelDate.reverse()
+	_objectCount.reverse()
+	
+	_sig0 = _sig0.get_string_from_ascii()
+	_sig1 = _sig1.get_string_from_ascii()
+	_levelWidth = _levelWidth.decode_float(0)
+	_levelHeight = _levelHeight.decode_float(0)
 	_levelDate = _levelDate.decode_u64(0)
 	_levelDate = Time.get_datetime_dict_from_unix_time(_levelDate)
-	_objectCount.reverse()
 	_objectCount = _objectCount.decode_u32(0)
 	
-	print("Signature: ", _sig0, ", ", _sig1)
-	print("level width: ", _levelWidth)
-	print("level height: ", _levelHeight)
-	print("creation: ", _levelDate)
-	print("objects: ", _objectCount)
+	print("\nSignature: ", _sig0, ", ", _sig1)
+	print("level (width: ", _levelWidth, ", height: ", _levelHeight, ")")
+	print("creation: ", _levelDate.day, "/", _levelDate.month, "/", _levelDate.year, " at ", _levelDate.hour, ":", _levelDate.minute, ":", _levelDate.second)
+	print("objects: ", _objectCount, "\n")
 	
 	_iterate_Objects(_objectCount, _data, 0)
-	
 
 func _process_ALLD(dir):
 	print("file path", dir)
@@ -68,8 +59,9 @@ func _iterate_Objects(Count, data, idt):
 	var SIZE
 	var ANGLE
 	var SPEED
-	var ORBIT
+	var STEP
 	var TYPE
+	var TYPEs
 	#endregion
 	
 	for i in Count:
@@ -80,7 +72,7 @@ func _iterate_Objects(Count, data, idt):
 		ID = obj.slice(0, 1)
 		TYPE = obj.slice(1, 2)
 		OBID = obj.slice(2, 3)
-		ORBIT = obj.slice(3, 4)
+		STEP = obj.slice(3, 4)
 		APX = obj.slice(4, 8)
 		APY = obj.slice(8, 12)
 		SIZE = obj.slice(12, 16)
@@ -104,7 +96,7 @@ func _iterate_Objects(Count, data, idt):
 		ID = ID.decode_u8(0)
 		TYPE = TYPE.decode_u8(0)
 		OBID = OBID.decode_u8(0)
-		ORBIT = ORBIT.decode_s8(0)
+		STEP = STEP.decode_s8(0)
 		APX = APX.decode_float(0)
 		APY = APY.decode_float(0)
 		SIZE = floor(SIZE.decode_float(0) / 25.0)
@@ -114,4 +106,21 @@ func _iterate_Objects(Count, data, idt):
 		RPY = RPY.decode_float(0)
 		#endregion
 		
-		print("Object: ", i+1, "\n  Id: ", ID, "\n  Type: ", TYPE, "\n  Orbiting Id: ", OBID, "\n  Orbit speed: ", ORBIT, "\n  Position: (x: ", APX, ", y: ", APY, ")\n  Size: ", SIZE, "\n  Angle: ", ANGLE, "\n  Velocity: ", SPEED, "\n  Orbiting position: (x: ", RPX, ", y: ", RPY, ")\n")
+		if TYPE == 0:
+			TYPEs = "Player"
+		elif TYPE == 1:
+			TYPEs = "Star"
+		elif TYPE == 2:
+			TYPEs = "Goal Star"
+		elif TYPE == 3:
+			TYPEs = "Asteroid"
+		elif TYPE == 4:
+			TYPEs = "Moon"
+		elif TYPE == 5:
+			TYPEs = "Barycenter"
+		elif TYPE == 6:
+			TYPEs = "Black Hole"
+		else:
+			TYPEs = "null"
+		
+		print("Object: ", i+1, "\n{\n  Id: ", ID, "\n  Type: ", TYPEs, "\n  Orbiting Id: ", OBID, "\n  Orbit step: ", STEP, "\n  Position: (x: ", APX, ", y: ", APY, ")\n  Size: ", SIZE, "\n  Angle: ", ANGLE, "\n  Velocity: ", SPEED, "\n  Orbiting position: (x: ", RPX, ", y: ", RPY, ")\n}\n")
