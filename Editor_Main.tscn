@@ -76,12 +76,16 @@ switch_on_hover = true
 item_count = 6
 popup/item_0/text = "Undo"
 popup/item_0/id = 0
+popup/item_0/disabled = true
 popup/item_1/text = "Redo"
 popup/item_1/id = 1
+popup/item_1/disabled = true
 popup/item_2/text = "Copy"
 popup/item_2/id = 2
+popup/item_2/disabled = true
 popup/item_3/text = "Paste"
 popup/item_3/id = 3
+popup/item_3/disabled = true
 popup/item_4/text = "Create"
 popup/item_4/id = 4
 popup/item_5/text = "Delete"
@@ -89,6 +93,7 @@ popup/item_5/id = 5
 
 [node name="View" type="MenuButton" parent="CanvasLayer/Control/MenuBar/HBoxContainer"]
 layout_mode = 2
+disabled = true
 text = "View"
 switch_on_hover = true
 item_count = 4
@@ -110,5 +115,9 @@ popup/item_3/id = 3
 
 [node name="Options" type="MenuButton" parent="CanvasLayer/Control/MenuBar/HBoxContainer"]
 layout_mode = 2
+disabled = true
 text = "Options"
 switch_on_hover = true
+
+[connection signal="dir_selected" from="CanvasLayer/Control/MenuBar/HBoxContainer/File/Load" to="CanvasLayer/Control" method="_on_load_dir_selected"]
+[connection signal="file_selected" from="CanvasLayer/Control/MenuBar/HBoxContainer/File/Load" to="CanvasLayer/Control" method="_on_load_file_selected"]

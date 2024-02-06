@@ -1,5 +1,11 @@
 Orbient(Astronomical Leap) Level Editor
 
+Spectate mode goals:
+  - shows all objects in there starting positions shaded as they would be in game and allows you to move a camera around the level
+	
+Simulation mode goals:
+  - bake (10-120)seconds of gameplay with 1 of 16 input files 1-8 pre-made 9-16 custom set
+
 Alpha 0.0.1
   - Saving/loading levels
   - Object creation deletion
@@ -34,7 +40,6 @@ Alpha 0.0.6
 Alpha 0.0.7
   - Bugfix and interface cleaning up
   - Refactor code
-
 
 Alpha 0.0.8
   - Making the interface look pretty

@@ -80,6 +80,8 @@ func _MenuBar():
 	SsMenuTrans.add_item("Free")
 	SsMenuTrans.add_item("X")
 	SsMenuTrans.add_item("Y")
+	SsMenuTrans.set_item_disabled(1, true)
+	SsMenuTrans.set_item_disabled(2, true)
 	#endregion
 	
 	#region SCALE
@@ -88,6 +90,8 @@ func _MenuBar():
 	SsMenuScale.add_item("Uniform")
 	SsMenuScale.add_item("X")
 	SsMenuScale.add_item("Y")
+	SsMenuScale.set_item_disabled(1, true)
+	SsMenuScale.set_item_disabled(2, true)
 	#endregion
 	
 	#region TYPE
@@ -104,7 +108,6 @@ func _MenuBar():
 	
 	MenuEdit.get_popup().add_child(SMenuObject, true) #adds Object as a child of the Edit Menu
 	MenuEdit.get_popup().add_submenu_item("Object","Object") #adds the button for the Object Submenu and its popup menu
-	
 	if (Godot == true): print(MenuEdit.get_child_count(), " Edit Menu Child Count")
 	
 	SMenuObject.add_child(SsMenuTrans) #
@@ -140,3 +143,8 @@ func _MenuBar():
 	#endregion
 	#endregion
 	#endregion
+
+func _on_load_file_selected(path):
+	var Level_interpreter = preload("res://Level_interpreter.gd")
+	var LI = Level_interpreter.new()
+	LI._find_level_type(path)
