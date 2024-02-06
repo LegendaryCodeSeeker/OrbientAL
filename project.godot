@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="OrbientAL"
-config/version="Alpha 0.0.0_15"
+config/version="Alpha 0.0.0_20"
 run/main_scene="res://Editor_Main.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 run/max_fps=60
