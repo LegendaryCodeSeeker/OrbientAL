@@ -2,14 +2,18 @@ extends Node
 
 func _find_level_type(dir):
 	var Level = FileAccess.open(dir, FileAccess.READ)
-	var LL = Level.get_length() / 16
-	Level.close()
-	if (LL % 2 == 0):
-		print("this is an orbient level")
-		_process_OLD(dir)
+	var LL = Level.get_length() % 16
+	if (LL == 0):
+		LL = Level.get_length() / 16
+		Level.close()
+		if (LL % 2 == 0):
+			print("this is an orbient level")
+			_process_OLD(dir)
+		else:
+			print("this is an astronomical leap level (WARNING not currently implamented)")
+			_process_ALLD(dir)
 	else:
-		print("this is an astronomical leap level (WARNING not currently implamented)")
-		_process_ALLD(dir)
+		print("incomplete line(s)")
 
 func _process_OLD(dir):
 	print("file path: ", dir)
@@ -61,7 +65,8 @@ func _iterate_Objects(Count, data, idt):
 	var SPEED
 	var STEP
 	var TYPE
-	var TYPEs
+	var TYPEs = ["Player","Star","Goal Star","Asteroid","Moon","Barycenter","Null"]
+	var stype
 	#endregion
 	
 	for i in Count:
@@ -106,21 +111,14 @@ func _iterate_Objects(Count, data, idt):
 		RPY = RPY.decode_float(0)
 		#endregion
 		
-		if TYPE == 0:
-			TYPEs = "Player"
-		elif TYPE == 1:
-			TYPEs = "Star"
-		elif TYPE == 2:
-			TYPEs = "Goal Star"
-		elif TYPE == 3:
-			TYPEs = "Asteroid"
-		elif TYPE == 4:
-			TYPEs = "Moon"
-		elif TYPE == 5:
-			TYPEs = "Barycenter"
-		elif TYPE == 6:
-			TYPEs = "Black Hole"
+		if TYPE >= 0 and TYPE <=5:
+			stype = TYPEs[TYPE]
 		else:
-			TYPEs = "null"
+			stype = TYPEs[6]
 		
-		print("Object: ", i+1, "\n{\n  Id: ", ID, "\n  Type: ", TYPEs, "\n  Orbiting Id: ", OBID, "\n  Orbit step: ", STEP, "\n  Position: (x: ", APX, ", y: ", APY, ")\n  Size: ", SIZE, "\n  Angle: ", ANGLE, "\n  Velocity: ", SPEED, "\n  Orbiting position: (x: ", RPX, ", y: ", RPY, ")\n}\n")
+		if OBID == 255:
+			OBID = "Space"
+		else:
+			pass
+		
+		print("Object: ", i+1, "\n{\n  Id: ", ID, "\n  Type: ", stype, "\n  Orbiting Id: ", OBID, "\n  Orbit step: ", STEP, "\n  Position: (x: ", APX, ", y: ", APY, ")\n  Size: ", SIZE, "\n  Angle: ", ANGLE, "\n  Velocity: ", SPEED, "\n  Orbiting position: (x: ", RPX, ", y: ", RPY, ")\n}\n")

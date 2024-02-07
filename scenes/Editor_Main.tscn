@@ -48,6 +48,7 @@ cancel_button_text = "Nevermind"
 mode_overrides_title = false
 file_mode = 0
 root_subfolder = "res://Levels"
+filters = PackedStringArray("*.bin", "*.bak")
 
 [node name="Save" type="FileDialog" parent="CanvasLayer/Control/MenuBar/HBoxContainer/File"]
 title = "Save Level"
@@ -119,5 +120,4 @@ disabled = true
 text = "Options"
 switch_on_hover = true
 
-[connection signal="dir_selected" from="CanvasLayer/Control/MenuBar/HBoxContainer/File/Load" to="CanvasLayer/Control" method="_on_load_dir_selected"]
 [connection signal="file_selected" from="CanvasLayer/Control/MenuBar/HBoxContainer/File/Load" to="CanvasLayer/Control" method="_on_load_file_selected"]

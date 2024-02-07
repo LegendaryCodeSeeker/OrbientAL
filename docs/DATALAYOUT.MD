@@ -20,10 +20,7 @@ Orbient:
 		05 - Barycenter
 		06 - Black Hole
 	next byte: Orbit Target ID (unsigned int)
-	next byte: Orbit Direction and Speed (unsigned int)
-		00 - Motionless
-		01 to 7F - Counter Clockwise (in this range 01 is slowest (still moving) and 7F is fastest)
-		80 to FF - Clockwise (in this range 80 is fastest and FF is slowest (still moving))
+	next byte: Orbit Step (signed int)
 	next 4 bytes: X Position Not Orbiting (float)
 	next 4 bytes: Y Position Not Orbiting (float)
 	next 4 bytes: Size (float)
