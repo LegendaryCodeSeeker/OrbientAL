@@ -2,30 +2,37 @@
 
 [ext_resource type="Script" path="res://scripts/Menubar.gd" id="1_y8s3i"]
 
-[node name="Node3D" type="Node3D"]
+[node name="3D space" type="Node3D"]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="GUI" type="CanvasLayer" parent="."]
 
-[node name="Control" type="Control" parent="CanvasLayer"]
+[node name="3D" type="Control" parent="GUI"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="2D" type="Control" parent="GUI"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_y8s3i")
 
-[node name="MenuBar" type="MenuBar" parent="CanvasLayer/Control"]
+[node name="MenuBar" type="MenuBar" parent="GUI/2D"]
 custom_minimum_size = Vector2(96, 32)
 layout_mode = 0
 offset_right = 96.0
 offset_bottom = 40.0
 tooltip_text = "File"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/MenuBar"]
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/2D/MenuBar"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="File" type="MenuButton" parent="CanvasLayer/Control/MenuBar/HBoxContainer"]
+[node name="File" type="MenuButton" parent="GUI/2D/MenuBar/HBoxContainer"]
 layout_mode = 2
 text = "File"
 switch_on_hover = true
@@ -39,7 +46,7 @@ popup/item_2/id = 2
 popup/item_3/text = "Quit"
 popup/item_3/id = 3
 
-[node name="Load" type="FileDialog" parent="CanvasLayer/Control/MenuBar/HBoxContainer/File"]
+[node name="Load" type="FileDialog" parent="GUI/2D/MenuBar/HBoxContainer/File"]
 title = "Load Level"
 initial_position = 1
 size = Vector2i(720, 480)
@@ -50,7 +57,7 @@ file_mode = 0
 root_subfolder = "res://Levels"
 filters = PackedStringArray("*.bin", "*.bak")
 
-[node name="Save" type="FileDialog" parent="CanvasLayer/Control/MenuBar/HBoxContainer/File"]
+[node name="Save" type="FileDialog" parent="GUI/2D/MenuBar/HBoxContainer/File"]
 title = "Save Level"
 initial_position = 1
 size = Vector2i(720, 480)
@@ -58,19 +65,19 @@ ok_button_text = "Save"
 cancel_button_text = "Nevermind"
 access = 2
 
-[node name="New" type="ConfirmationDialog" parent="CanvasLayer/Control/MenuBar/HBoxContainer/File"]
+[node name="New" type="ConfirmationDialog" parent="GUI/2D/MenuBar/HBoxContainer/File"]
 title = "New Level?"
 initial_position = 1
 size = Vector2i(647, 80)
 cancel_button_text = "Nevermind"
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/MenuBar/HBoxContainer/File/New"]
+[node name="Label" type="Label" parent="GUI/2D/MenuBar/HBoxContainer/File/New"]
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Are you sure you want to make a new level? (Any progressed not saved will be lost)"
 horizontal_alignment = 1
 
-[node name="Edit" type="MenuButton" parent="CanvasLayer/Control/MenuBar/HBoxContainer"]
+[node name="Edit" type="MenuButton" parent="GUI/2D/MenuBar/HBoxContainer"]
 layout_mode = 2
 text = "Edit"
 switch_on_hover = true
@@ -92,7 +99,7 @@ popup/item_4/id = 4
 popup/item_5/text = "Delete"
 popup/item_5/id = 5
 
-[node name="View" type="MenuButton" parent="CanvasLayer/Control/MenuBar/HBoxContainer"]
+[node name="View" type="MenuButton" parent="GUI/2D/MenuBar/HBoxContainer"]
 layout_mode = 2
 disabled = true
 text = "View"
@@ -114,10 +121,16 @@ popup/item_3/checkable = 1
 popup/item_3/checked = true
 popup/item_3/id = 3
 
-[node name="Options" type="MenuButton" parent="CanvasLayer/Control/MenuBar/HBoxContainer"]
+[node name="Options" type="MenuButton" parent="GUI/2D/MenuBar/HBoxContainer"]
 layout_mode = 2
 disabled = true
 text = "Options"
 switch_on_hover = true
 
-[connection signal="file_selected" from="CanvasLayer/Control/MenuBar/HBoxContainer/File/Load" to="CanvasLayer/Control" method="_on_load_file_selected"]
+[node name="Level" type="Marker3D" parent="."]
+gizmo_extents = 0.0
+
+[node name="Camera3D" type="Camera3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 256.294)
+
+[connection signal="file_selected" from="GUI/2D/MenuBar/HBoxContainer/File/Load" to="GUI/2D" method="_on_load_file_selected"]

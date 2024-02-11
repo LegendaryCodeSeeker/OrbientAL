@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://b45xew4ej3101"
+path="res://.godot/imported/TEST_SPHERE.obj-9fbd24d470f6720e2c7e06d68544a124.mesh"
+
+[deps]
+
+files=["res://.godot/imported/TEST_SPHERE.obj-9fbd24d470f6720e2c7e06d68544a124.mesh"]
+
+source_file="res://assets/models/TEST_SPHERE.obj"
+dest_files=["res://.godot/imported/TEST_SPHERE.obj-9fbd24d470f6720e2c7e06d68544a124.mesh", "res://.godot/imported/TEST_SPHERE.obj-9fbd24d470f6720e2c7e06d68544a124.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

@@ -1,22 +1,24 @@
 extends Node
 
 func _find_level_type(dir):
+	
 	var Level = FileAccess.open(dir, FileAccess.READ)
 	var LL = Level.get_length() % 16
-	if (LL == 0):
-		LL = Level.get_length() / 16
+	
+	if (LL != 0):
 		Level.close()
-		if (LL % 2 == 0):
-			print("this is an orbient level")
-			_process_OLD(dir)
-		else:
-			print("this is an astronomical leap level (WARNING not currently implamented)")
-			_process_ALLD(dir)
+		return(null)
+		
+	LL = Level.get_length() / 16
+	Level.close()
+	
+	if (LL % 2 == 0):
+		_process_OLD(dir)
 	else:
-		print("incomplete line(s)")
+		print("this is an astronomical leap level (WARNING not currently implamented)")
+		_process_ALLD(dir)
 
 func _process_OLD(dir):
-	print("file path: ", dir)
 	
 	var _data = FileAccess.get_file_as_bytes(dir)
 	var _sig0 = _data.slice(0, 8)
@@ -51,7 +53,10 @@ func _process_ALLD(dir):
 
 func _iterate_Objects(Count, data, idt):
 	var obj
-	var a
+	var offset
+	var parameters
+	var ObjInst = preload("res://scripts/Object_instancer.gd")
+	var instance = ObjInst.new()
 	
 	#region Object variables
 	var ID
@@ -65,13 +70,11 @@ func _iterate_Objects(Count, data, idt):
 	var SPEED
 	var STEP
 	var TYPE
-	var TYPEs = ["Player","Star","Goal Star","Asteroid","Moon","Barycenter","Null"]
-	var stype
 	#endregion
-	
+	print("iterating")
 	for i in Count:
-		a = 32*i
-		obj = data.slice(32+a, 64+a)
+		offset = 32*i
+		obj = data.slice(32+offset, 64+offset)
 		
 		#region SLICER
 		ID = obj.slice(0, 1)
@@ -111,14 +114,8 @@ func _iterate_Objects(Count, data, idt):
 		RPY = RPY.decode_float(0)
 		#endregion
 		
-		if TYPE >= 0 and TYPE <=5:
-			stype = TYPEs[TYPE]
-		else:
-			stype = TYPEs[6]
+		parameters = [ID,TYPE,OBID,STEP,SIZE,ANGLE,SPEED,APX,APY,RPX,RPY]
 		
-		if OBID == 255:
-			OBID = "Space"
-		else:
-			pass
+		instance._create_Instance(parameters)
 		
-		print("Object: ", i+1, "\n{\n  Id: ", ID, "\n  Type: ", stype, "\n  Orbiting Id: ", OBID, "\n  Orbit step: ", STEP, "\n  Position: (x: ", APX, ", y: ", APY, ")\n  Size: ", SIZE, "\n  Angle: ", ANGLE, "\n  Velocity: ", SPEED, "\n  Orbiting position: (x: ", RPX, ", y: ", RPY, ")\n}\n")
+		
