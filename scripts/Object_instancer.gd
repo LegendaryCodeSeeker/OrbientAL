@@ -1,9 +1,31 @@
 extends Node
 
 #parameters = [ID,TYPE,OBID,STEP,SIZE,ANGLE,SPEED,APX,APY,RPX,RPY]
+func _on_level_ready():
+	pass # Replace with function body
+
 func _create_Instance(param):
-	var Sphere = preload("res://assets/models/TEST_SPHERE.obj")
-	var ojid = str(param[1], param[0])
+	var Sphere = SphereMesh.new()
+	var sig0
+	var sig1
+	
+	#region 00x 0xx xxx
+	if(param[0] < 10):
+		sig0 = str("00",param[0])
+	elif(param[0] < 100):
+		sig0 = str("0",param[0])
+	else:
+		sig0 = str(param[0])
+	
+	if(param[1] < 10):
+		sig1 = str("00",param[1])
+	elif(param[1] < 100):
+		sig1 = str("0",param[1])
+	else:
+		sig1 = str(param[1])
+	#endregion
+	
+	var ojid = str(sig1,sig0)
 	var object = MeshInstance3D.new()
 	var pos = Vector3(0,0,0)
 	
@@ -16,4 +38,6 @@ func _create_Instance(param):
 	
 	object.set_name(ojid)
 	object.set_position(pos)
+	Sphere.set_radius(1 + (1 * param[4]))
 	object.set_mesh(Sphere)
+	get_node(".").add_child(object)

@@ -1,10 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://nakghjpyqj8t"]
+[gd_scene load_steps=3 format=3 uid="uid://nakghjpyqj8t"]
 
 [ext_resource type="Script" path="res://scripts/Menubar.gd" id="1_y8s3i"]
+[ext_resource type="ArrayMesh" uid="uid://b45xew4ej3101" path="res://assets/models/TEST_SPHERE.obj" id="2_uenxd"]
 
 [node name="3D space" type="Node3D"]
 
 [node name="GUI" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
 
 [node name="3D" type="Control" parent="GUI"]
 visible = false
@@ -127,10 +129,24 @@ disabled = true
 text = "Options"
 switch_on_hover = true
 
+[node name="ErrorPop" type="AcceptDialog" parent="GUI/2D"]
+title = "Error Loading File"
+initial_position = 2
+unresizable = true
+dialog_text = "This is not an Orbient or Astronomical Leap level file."
+
 [node name="Level" type="Marker3D" parent="."]
+process_mode = 3
 gizmo_extents = 0.0
 
 [node name="Camera3D" type="Camera3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 256.294)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15.7898)
+fov = 35.6
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Level"]
+mesh = ExtResource("2_uenxd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Level"]
+transform = Transform3D(0.454006, -0.539056, 0.709434, 0, 0.796224, 0.605002, -0.890999, -0.274675, 0.36149, 0, 2.17467, 0)
 
 [connection signal="file_selected" from="GUI/2D/MenuBar/HBoxContainer/File/Load" to="GUI/2D" method="_on_load_file_selected"]

@@ -15,7 +15,7 @@ extends Control
 @onready var SsMenuSim = PopupMenu.new()
 #endregion
 
-#region SHORTPATHS
+#region SHORTPATH
 @onready var MenuFile = $MenuBar/HBoxContainer/File
 @onready var MenuEdit = $MenuBar/HBoxContainer/Edit
 @onready var MenuView = $MenuBar/HBoxContainer/View
@@ -23,6 +23,7 @@ extends Control
 #endregion
 
 func _ready():
+	
 	_MenuBar()#handles menu bar init doing it in code because thats what the tutorials show lol
 	
 	MenuFile.get_popup().connect("id_pressed", _on_File_item_pressed)
@@ -33,7 +34,6 @@ func _ready():
 	#$MenuBar/HBoxContainer/Edit/Object.get_popup().connect("id_pressed", _on_Object_Smenu_Edit_pressed)
 
 func _on_File_item_pressed(id):
-	if (Godot == true): print(id, " File Menu Child")
 	if id == 1:
 		$MenuBar/HBoxContainer/File/Load.popup()
 		if (Godot == true): print("Load")
@@ -52,10 +52,10 @@ func _on_File_item_pressed(id):
 func _on_Edit_item_pressed(id):
 	if (Godot == true): print(id, " Edit Menu Child")
 
-func _on_View_item_pressed(id):
+func _on_View_item_pressed(_id):
 	pass
 	
-func _on_Opt_item_pressed(id):
+func _on_Opt_item_pressed(_id):
 	pass
 	
 func _on_Object_Smenu_Edit_pressed(id):
@@ -108,7 +108,6 @@ func _MenuBar():
 	
 	MenuEdit.get_popup().add_child(SMenuObject, true) #adds Object as a child of the Edit Menu
 	MenuEdit.get_popup().add_submenu_item("Object","Object") #adds the button for the Object Submenu and its popup menu
-	if (Godot == true): print(MenuEdit.get_child_count(), " Edit Menu Child Count")
 	
 	SMenuObject.add_child(SsMenuTrans) #
 	SMenuObject.add_child(SsMenuScale)
@@ -147,4 +146,6 @@ func _MenuBar():
 func _on_load_file_selected(path):
 	var Level_interpreter = preload("res://scripts/Level_interpreter.gd")
 	var LI = Level_interpreter.new()
-	LI._find_level_type(path)
+	var Level = LI._find_level_type(path)
+	if (Level == 12):
+		$ErrorPop.popup()

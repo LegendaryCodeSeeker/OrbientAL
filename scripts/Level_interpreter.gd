@@ -7,7 +7,7 @@ func _find_level_type(dir):
 	
 	if (LL != 0):
 		Level.close()
-		return(null)
+		return(12)
 		
 	LL = Level.get_length() / 16
 	Level.close()
@@ -21,18 +21,24 @@ func _find_level_type(dir):
 func _process_OLD(dir):
 	
 	var _data = FileAccess.get_file_as_bytes(dir)
+	
+	#region SLICER
 	var _sig0 = _data.slice(0, 8)
 	var _sig1 = _data.slice(28, 32)
 	var _levelWidth = _data.slice(8, 12)
 	var _levelHeight = _data.slice(12, 16)
 	var _levelDate = _data.slice(16, 24)
 	var _objectCount = _data.slice(24, 28)
+	#endregion
 	
+	#region REVERSER
 	_levelWidth.reverse()
 	_levelHeight.reverse()
 	_levelDate.reverse()
 	_objectCount.reverse()
+	#endregion
 	
+	#region DECODER
 	_sig0 = _sig0.get_string_from_ascii()
 	_sig1 = _sig1.get_string_from_ascii()
 	_levelWidth = _levelWidth.decode_float(0)
@@ -40,6 +46,7 @@ func _process_OLD(dir):
 	_levelDate = _levelDate.decode_u64(0)
 	_levelDate = Time.get_datetime_dict_from_unix_time(_levelDate)
 	_objectCount = _objectCount.decode_u32(0)
+	#endregion
 	
 	print("\nSignature: ", _sig0, ", ", _sig1)
 	print("level (width: ", _levelWidth, ", height: ", _levelHeight, ")")
@@ -51,7 +58,7 @@ func _process_OLD(dir):
 func _process_ALLD(dir):
 	print("file path", dir)
 
-func _iterate_Objects(Count, data, idt):
+func _iterate_Objects(Count, data, _idt):
 	var obj
 	var offset
 	var parameters
@@ -71,7 +78,9 @@ func _iterate_Objects(Count, data, idt):
 	var STEP
 	var TYPE
 	#endregion
+	
 	print("iterating")
+	
 	for i in Count:
 		offset = 32*i
 		obj = data.slice(32+offset, 64+offset)
@@ -118,4 +127,6 @@ func _iterate_Objects(Count, data, idt):
 		
 		instance._create_Instance(parameters)
 		
+		print("Object: ", i+1, "\n{\n Id: ", ID, "\n Type: ", TYPE, "\n Orbiting Id: ", OBID, "\n Orbit step: ", STEP, "\n Position: (x: ", APX, ", y: ", APY, ")\n Size: ", SIZE, "\n Angle: ", ANGLE, "\n Velocity: ", SPEED, "\n Orbiting position: (x: ", RPX, ", y: ", RPY, ")\n}\n")
 		
+
