@@ -8,6 +8,9 @@ func _create_Instance(param):
 	var Sphere = SphereMesh.new()
 	var sig0
 	var sig1
+	var object = MeshInstance3D.new()
+	var pos = Vector3(param[7],param[8],0)
+	var size = (param[4] + 2) / 20.0 + 3
 	
 	#region 00x 0xx xxx
 	if(param[0] < 10):
@@ -26,18 +29,21 @@ func _create_Instance(param):
 	#endregion
 	
 	var ojid = str(sig1,sig0)
-	var object = MeshInstance3D.new()
-	var pos = Vector3(0,0,0)
 	
 	print("Creating Instance: ", ojid)
 	
-	if (param[2] != 255):
-		pos = Vector3(param[7], param[8], 0)
-	else:
-		pos = Vector3(param[9], param[10], 0)
+	#if (param[2] != 255):
+	#	pos = Vector3(param[7], param[8], 0)
+	#else:
+	#	pos = Vector3(param[9], param[10], 0)
 	
 	object.set_name(ojid)
 	object.set_position(pos)
-	Sphere.set_radius(1 + (1 * param[4]))
+	Sphere.set_radius(size/3.0)
+	Sphere.set_height(size/1.5)
 	object.set_mesh(Sphere)
-	get_node(".").add_child(object)
+	var lvl = get_node("../..")
+	print("path: ", lvl)
+	#breakpoint
+	lvl.add_child(object)
+	print_orphan_nodes()

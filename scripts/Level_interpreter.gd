@@ -1,7 +1,6 @@
 extends Node
 
 func _find_level_type(dir):
-	
 	var Level = FileAccess.open(dir, FileAccess.READ)
 	var LL = Level.get_length() % 16
 	
@@ -59,11 +58,13 @@ func _process_ALLD(dir):
 	print("file path", dir)
 
 func _iterate_Objects(Count, data, _idt):
+	#breakpoint
 	var obj
 	var offset
 	var parameters
 	var ObjInst = preload("res://scripts/Object_instancer.gd")
 	var instance = ObjInst.new()
+	$".".add_child(instance)
 	
 	#region Object variables
 	var ID
@@ -116,7 +117,7 @@ func _iterate_Objects(Count, data, _idt):
 		STEP = STEP.decode_s8(0)
 		APX = APX.decode_float(0)
 		APY = APY.decode_float(0)
-		SIZE = floor(SIZE.decode_float(0) / 25.0)
+		SIZE = SIZE.decode_float(0)
 		ANGLE = ANGLE.decode_float(0)
 		SPEED = SPEED.decode_float(0)
 		RPX = RPX.decode_float(0)
@@ -124,8 +125,9 @@ func _iterate_Objects(Count, data, _idt):
 		#endregion
 		
 		parameters = [ID,TYPE,OBID,STEP,SIZE,ANGLE,SPEED,APX,APY,RPX,RPY]
-		
+		#breakpoint
 		instance._create_Instance(parameters)
+		
 		
 		print("Object: ", i+1, "\n{\n Id: ", ID, "\n Type: ", TYPE, "\n Orbiting Id: ", OBID, "\n Orbit step: ", STEP, "\n Position: (x: ", APX, ", y: ", APY, ")\n Size: ", SIZE, "\n Angle: ", ANGLE, "\n Velocity: ", SPEED, "\n Orbiting position: (x: ", RPX, ", y: ", RPY, ")\n}\n")
 		

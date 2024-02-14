@@ -1,7 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://nakghjpyqj8t"]
 
 [ext_resource type="Script" path="res://scripts/Menubar.gd" id="1_y8s3i"]
-[ext_resource type="ArrayMesh" uid="uid://b45xew4ej3101" path="res://assets/models/TEST_SPHERE.obj" id="2_uenxd"]
+
+[sub_resource type="Environment" id="Environment_fch18"]
+background_mode = 1
+ambient_light_color = Color(0.12549, 0.12549, 0.12549, 1)
+ambient_light_energy = 5.76
 
 [node name="3D space" type="Node3D"]
 
@@ -140,11 +144,11 @@ process_mode = 3
 gizmo_extents = 0.0
 
 [node name="Camera3D" type="Camera3D" parent="Level"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 15.7898)
-fov = 35.6
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Level"]
-mesh = ExtResource("2_uenxd")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 145.21, 119.675, 344.15)
+environment = SubResource("Environment_fch18")
+fov = 39.7
+size = 0.001
+near = 0.001
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Level"]
 transform = Transform3D(0.454006, -0.539056, 0.709434, 0, 0.796224, 0.605002, -0.890999, -0.274675, 0.36149, 0, 2.17467, 0)
