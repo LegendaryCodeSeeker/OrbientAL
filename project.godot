@@ -12,7 +12,7 @@ config_version=5
 
 config/name="OrbientAL"
 config/version="Alpha 0.0.0_27"
-run/main_scene="res://scenes/Editor_Main.tscn"
+run/main_scene="res://assets/scenes/Editor_Main.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 run/max_fps=60
 boot_splash/show_image=false
@@ -37,8 +37,8 @@ folder_colors={
 "res://addons/": "gray",
 "res://assets/": "red",
 "res://assets/models/": "orange",
+"res://assets/scenes/": "yellow",
+"res://assets/scripts/": "teal",
 "res://assets/textures/": "purple",
-"res://gource/": "gray",
-"res://scenes/": "yellow",
-"res://scripts/": "teal"
+"res://gource/": "gray"
 }

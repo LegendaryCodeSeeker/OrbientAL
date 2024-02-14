@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://nakghjpyqj8t"]
 
-[ext_resource type="Script" path="res://scripts/Menubar.gd" id="1_y8s3i"]
+[ext_resource type="Script" path="res://assets/scripts/Menubar.gd" id="1_id0nx"]
 
 [sub_resource type="Environment" id="Environment_fch18"]
 background_mode = 1
@@ -24,7 +24,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("1_y8s3i")
+script = ExtResource("1_id0nx")
 
 [node name="MenuBar" type="MenuBar" parent="GUI/2D"]
 custom_minimum_size = Vector2(96, 32)

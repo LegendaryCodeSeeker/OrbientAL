@@ -144,7 +144,7 @@ func _MenuBar():
 	#endregion
 
 func _on_load_file_selected(path):
-	var Level_interpreter = preload("res://scripts/Level_interpreter.gd")
+	var Level_interpreter = preload("res://assets/scripts/Level_interpreter.gd")
 	var LI = Level_interpreter.new()
 	$"../../Level".add_child(LI)
 	var Level = LI._find_level_type(path)

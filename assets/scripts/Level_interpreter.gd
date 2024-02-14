@@ -62,7 +62,7 @@ func _iterate_Objects(Count, data, _idt):
 	var obj
 	var offset
 	var parameters
-	var ObjInst = preload("res://scripts/Object_instancer.gd")
+	var ObjInst = preload("res://assets/scripts/Object_instancer.gd")
 	var instance = ObjInst.new()
 	$".".add_child(instance)
 	
