@@ -24,7 +24,7 @@ extends Control
 
 func _ready():
 	
-	_MenuBar()#handles menu bar init doing it in code because thats what the tutorials show lol
+	Menu_Bar()#handles menu bar init doing it in code because thats what the tutorials show lol
 	
 	MenuFile.get_popup().connect("id_pressed", _on_File_item_pressed)
 	MenuEdit.get_popup().connect("id_pressed", _on_Edit_item_pressed)
@@ -61,7 +61,7 @@ func _on_Opt_item_pressed(_id):
 func _on_Object_Smenu_Edit_pressed(id):
 	if (Godot == true): print(id, " Edit/Object Menu Child")
 	
-func _MenuBar():
+func Menu_Bar():
 	
 	#region EDIT
 	#adds the Options to the Edit button
@@ -143,10 +143,18 @@ func _MenuBar():
 	#endregion
 	#endregion
 
+func Clear():
+	var Clear = load("res://assets/scripts/Object_handler.gd")
+	var Level_items = $"../../Level".get_children()
+	
 func _on_load_file_selected(path):
-	var Level_interpreter = preload("res://assets/scripts/Level_interpreter.gd")
-	var LI = Level_interpreter.new()
+	Clear()
+	var level_Interpreter = preload("res://assets/scripts/Level_interpreter.gd")
+	var LI = level_Interpreter.new()
 	$"../../Level".add_child(LI)
-	var Level = LI._find_level_type(path)
+	var Level = LI.Find_Level_Type(path)
 	if (Level == 12):
 		$ErrorPop.popup()
+
+func _on_new_confirmed():
+	Clear()

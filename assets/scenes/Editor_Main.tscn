@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://nakghjpyqj8t"]
 
-[ext_resource type="Script" path="res://assets/scripts/Menubar.gd" id="1_id0nx"]
+[ext_resource type="Script" path="res://assets/scripts/Menu_bar.gd" id="1_id0nx"]
 
 [sub_resource type="Environment" id="Environment_fch18"]
 background_mode = 1
@@ -154,3 +154,4 @@ near = 0.001
 transform = Transform3D(0.454006, -0.539056, 0.709434, 0, 0.796224, 0.605002, -0.890999, -0.274675, 0.36149, 0, 2.17467, 0)
 
 [connection signal="file_selected" from="GUI/2D/MenuBar/HBoxContainer/File/Load" to="GUI/2D" method="_on_load_file_selected"]
+[connection signal="confirmed" from="GUI/2D/MenuBar/HBoxContainer/File/New" to="GUI/2D" method="_on_new_confirmed"]

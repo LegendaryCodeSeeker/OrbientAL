@@ -1,6 +1,6 @@
 extends Node
 
-func _find_level_type(dir):
+func Find_Level_Type(dir):
 	var Level = FileAccess.open(dir, FileAccess.READ)
 	var LL = Level.get_length() % 16
 	
@@ -12,59 +12,57 @@ func _find_level_type(dir):
 	Level.close()
 	
 	if (LL % 2 == 0):
-		_process_OLD(dir)
+		Process_OLD(dir)
 	else:
 		print("this is an astronomical leap level (WARNING not currently implamented)")
-		_process_ALLD(dir)
+		Process_ALLD(dir)
 
-func _process_OLD(dir):
+func Process_OLD(_Dir):
 	
-	var _data = FileAccess.get_file_as_bytes(dir)
+	var Data = FileAccess.get_file_as_bytes(_Dir)
 	
 	#region SLICER
-	var _sig0 = _data.slice(0, 8)
-	var _sig1 = _data.slice(28, 32)
-	var _levelWidth = _data.slice(8, 12)
-	var _levelHeight = _data.slice(12, 16)
-	var _levelDate = _data.slice(16, 24)
-	var _objectCount = _data.slice(24, 28)
+	var Sig0 = Data.slice(0, 8)
+	var Sig1 = Data.slice(28, 32)
+	var Level_width = Data.slice(8, 12)
+	var Level_height = Data.slice(12, 16)
+	var Level_date = Data.slice(16, 24)
+	var Object_count = Data.slice(24, 28)
 	#endregion
 	
 	#region REVERSER
-	_levelWidth.reverse()
-	_levelHeight.reverse()
-	_levelDate.reverse()
-	_objectCount.reverse()
+	Level_width.reverse()
+	Level_height.reverse()
+	Level_date.reverse()
+	Object_count.reverse()
 	#endregion
 	
 	#region DECODER
-	_sig0 = _sig0.get_string_from_ascii()
-	_sig1 = _sig1.get_string_from_ascii()
-	_levelWidth = _levelWidth.decode_float(0)
-	_levelHeight = _levelHeight.decode_float(0)
-	_levelDate = _levelDate.decode_u64(0)
-	_levelDate = Time.get_datetime_dict_from_unix_time(_levelDate)
-	_objectCount = _objectCount.decode_u32(0)
+	Sig0 = Sig0.get_string_from_ascii()
+	Sig1 = Sig1.get_string_from_ascii()
+	Level_width = Level_width.decode_float(0)
+	Level_height = Level_height.decode_float(0)
+	Level_date = Level_date.decode_u64(0)
+	Level_date = Time.get_datetime_dict_from_unix_time(Level_date)
+	Object_count = Object_count.decode_u32(0)
 	#endregion
 	
-	print("\nSignature: ", _sig0, ", ", _sig1)
-	print("level (width: ", _levelWidth, ", height: ", _levelHeight, ")")
-	print("creation: ", _levelDate.day, "/", _levelDate.month, "/", _levelDate.year, " at ", _levelDate.hour, ":", _levelDate.minute, ":", _levelDate.second)
-	print("objects: ", _objectCount, "\n")
+	print("\nSignature: ", Sig0, ", ", Sig1)
+	print("level (width: ", Level_width, ", height: ", Level_height, ")")
+	print("creation: ", Level_date.day, "/", Level_date.month, "/", Level_date.year, " at ", Level_date.hour, ":", Level_date.minute, ":", Level_date.second)
+	print("objects: ", Object_count, "\n")
 	
-	_iterate_Objects(_objectCount, _data, 0)
+	Iterate_Objects(Object_count, Data, 0)
 
-func _process_ALLD(dir):
-	print("file path", dir)
+func Process_ALLD(_Dir):
+	print("file path", _Dir)
 
-func _iterate_Objects(Count, data, _idt):
+func Iterate_Objects(_Count, _Data, _IDT):
 	#breakpoint
-	var obj
-	var offset
-	var parameters
-	var ObjInst = preload("res://assets/scripts/Object_instancer.gd")
-	var instance = ObjInst.new()
-	$".".add_child(instance)
+	var Obj
+	var Offset
+	var Parameters
+	var Instance = load("res://assets/scripts/Object_handler.gd")
 	
 	#region Object variables
 	var ID
@@ -82,22 +80,22 @@ func _iterate_Objects(Count, data, _idt):
 	
 	print("iterating")
 	
-	for i in Count:
-		offset = 32*i
-		obj = data.slice(32+offset, 64+offset)
+	for i in _Count:
+		Offset = 32*i
+		Obj = _Data.slice(32+Offset, 64+Offset)
 		
 		#region SLICER
-		ID = obj.slice(0, 1)
-		TYPE = obj.slice(1, 2)
-		OBID = obj.slice(2, 3)
-		STEP = obj.slice(3, 4)
-		APX = obj.slice(4, 8)
-		APY = obj.slice(8, 12)
-		SIZE = obj.slice(12, 16)
-		ANGLE = obj.slice(16, 20)
-		SPEED = obj.slice(20, 24)
-		RPX = obj.slice(24, 28)
-		RPY = obj.slice(28)
+		ID = Obj.slice(0, 1)
+		TYPE = Obj.slice(1, 2)
+		OBID = Obj.slice(2, 3)
+		STEP = Obj.slice(3, 4)
+		APX = Obj.slice(4, 8)
+		APY = Obj.slice(8, 12)
+		SIZE = Obj.slice(12, 16)
+		ANGLE = Obj.slice(16, 20)
+		SPEED = Obj.slice(20, 24)
+		RPX = Obj.slice(24, 28)
+		RPY = Obj.slice(28)
 		#endregion
 		
 		#region REVERSER
@@ -124,10 +122,9 @@ func _iterate_Objects(Count, data, _idt):
 		RPY = RPY.decode_float(0)
 		#endregion
 		
-		parameters = [ID,TYPE,OBID,STEP,SIZE,ANGLE,SPEED,APX,APY,RPX,RPY]
+		Parameters = [ID,TYPE,OBID,STEP,SIZE,ANGLE,SPEED,APX,APY,RPX,RPY]
 		#breakpoint
-		instance._create_Instance(parameters)
-		
+		$"..".add_child(Instance.Object_instancer._create(Parameters))
 		
 		print("Object: ", i+1, "\n{\n Id: ", ID, "\n Type: ", TYPE, "\n Orbiting Id: ", OBID, "\n Orbit step: ", STEP, "\n Position: (x: ", APX, ", y: ", APY, ")\n Size: ", SIZE, "\n Angle: ", ANGLE, "\n Velocity: ", SPEED, "\n Orbiting position: (x: ", RPX, ", y: ", RPY, ")\n}\n")
 		
