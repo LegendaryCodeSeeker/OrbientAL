@@ -6,30 +6,30 @@ extends Control
 #endregion
 
 #region .NEW()
-@onready var SMenuObject = PopupMenu.new()
-@onready var SsMenuTrans = PopupMenu.new()
-@onready var SsMenuScale = PopupMenu.new()
-@onready var SsMenuType = OptionButton.new()
-@onready var SMenuMode = PopupMenu.new()
-@onready var SsMenuSpec = PopupMenu.new()
-@onready var SsMenuSim = PopupMenu.new()
+@onready var S_menu_object = PopupMenu.new()
+@onready var Ss_menu_trans = PopupMenu.new()
+@onready var Ss_menu_scale = PopupMenu.new()
+@onready var Ss_menu_type = OptionButton.new()
+@onready var S_menu_mode = PopupMenu.new()
+@onready var Ss_menu_spec = PopupMenu.new()
+@onready var Ss_menu_sim = PopupMenu.new()
 #endregion
 
 #region SHORTPATH
-@onready var MenuFile = $MenuBar/HBoxContainer/File
-@onready var MenuEdit = $MenuBar/HBoxContainer/Edit
-@onready var MenuView = $MenuBar/HBoxContainer/View
-@onready var MenuOptions = $MenuBar/HBoxContainer/Options
+@onready var Menu_file = $MenuBar/HBoxContainer/File
+@onready var Menu_edit = $MenuBar/HBoxContainer/Edit
+@onready var Menu_view = $MenuBar/HBoxContainer/View
+@onready var Menu_options = $MenuBar/HBoxContainer/Options
 #endregion
 
 func _ready():
 	
 	Menu_Bar()#handles menu bar init doing it in code because thats what the tutorials show lol
 	
-	MenuFile.get_popup().connect("id_pressed", _on_File_item_pressed)
-	MenuEdit.get_popup().connect("id_pressed", _on_Edit_item_pressed)
-	MenuView.get_popup().connect("id_pressed", _on_View_item_pressed)
-	MenuOptions.get_popup().connect("id_pressed", _on_Opt_item_pressed)
+	Menu_file.get_popup().connect("id_pressed", _on_File_item_pressed)
+	Menu_edit.get_popup().connect("id_pressed", _on_Edit_item_pressed)
+	Menu_view.get_popup().connect("id_pressed", _on_View_item_pressed)
+	Menu_options.get_popup().connect("id_pressed", _on_Opt_item_pressed)
 	
 	#$MenuBar/HBoxContainer/Edit/Object.get_popup().connect("id_pressed", _on_Object_Smenu_Edit_pressed)
 
@@ -68,77 +68,77 @@ func Menu_Bar():
 	
 	#region OBJECT
 	#adds the Options to the Object Submenu
-	SMenuObject.set_name("Object")
-	SMenuObject.add_item(" ")
-	SMenuObject.set_item_disabled(0, true) #ugly workaround for Edit/Object/Type options item because im still learning i know but if it works it works
-	SMenuObject.add_item("Angle")
-	SMenuObject.add_item("Velocity")
+	S_menu_object.set_name("Object")
+	S_menu_object.add_item(" ")
+	S_menu_object.set_item_disabled(0, true) #ugly workaround for Edit/Object/Type options item because im still learning i know but if it works it works
+	S_menu_object.add_item("Angle")
+	S_menu_object.add_item("Velocity")
 	
 	#region TRANSFORM
 	#adds Trasnform SubSubMenu
-	SsMenuTrans.set_name("Transform")
-	SsMenuTrans.add_item("Free")
-	SsMenuTrans.add_item("X")
-	SsMenuTrans.add_item("Y")
-	SsMenuTrans.set_item_disabled(1, true)
-	SsMenuTrans.set_item_disabled(2, true)
+	Ss_menu_trans.set_name("Transform")
+	Ss_menu_trans.add_item("Free")
+	Ss_menu_trans.add_item("X")
+	Ss_menu_trans.add_item("Y")
+	Ss_menu_trans.set_item_disabled(1, true)
+	Ss_menu_trans.set_item_disabled(2, true)
 	#endregion
 	
 	#region SCALE
 	#adds Scale SubSubMenu
-	SsMenuScale.set_name("Scale")
-	SsMenuScale.add_item("Uniform")
-	SsMenuScale.add_item("X")
-	SsMenuScale.add_item("Y")
-	SsMenuScale.set_item_disabled(1, true)
-	SsMenuScale.set_item_disabled(2, true)
+	Ss_menu_scale.set_name("Scale")
+	Ss_menu_scale.add_item("Uniform")
+	Ss_menu_scale.add_item("X")
+	Ss_menu_scale.add_item("Y")
+	Ss_menu_scale.set_item_disabled(1, true)
+	Ss_menu_scale.set_item_disabled(2, true)
 	#endregion
 	
 	#region TYPE
 	#adds the Type Option button
-	SsMenuType.set_name("Type")
-	SsMenuType.add_item("Player")
-	SsMenuType.add_item("Star")
-	SsMenuType.add_item("Goal")
-	SsMenuType.add_item("Astroid")
-	SsMenuType.add_item("Moon")
-	SsMenuType.add_item("Barycenter")
-	SsMenuType.add_item("Black Hole")
+	Ss_menu_type.set_name("Type")
+	Ss_menu_type.add_item("Player")
+	Ss_menu_type.add_item("Star")
+	Ss_menu_type.add_item("Goal")
+	Ss_menu_type.add_item("Astroid")
+	Ss_menu_type.add_item("Moon")
+	Ss_menu_type.add_item("Barycenter")
+	Ss_menu_type.add_item("Black Hole")
 	#endregion
 	
-	MenuEdit.get_popup().add_child(SMenuObject, true) #adds Object as a child of the Edit Menu
-	MenuEdit.get_popup().add_submenu_item("Object","Object") #adds the button for the Object Submenu and its popup menu
+	Menu_edit.get_popup().add_child(S_menu_object, true) #adds Object as a child of the Edit Menu
+	Menu_edit.get_popup().add_submenu_item("Object","Object") #adds the button for the Object Submenu and its popup menu
 	
-	SMenuObject.add_child(SsMenuTrans) #
-	SMenuObject.add_child(SsMenuScale)
-	SMenuObject.add_child(SsMenuType)
-	SMenuObject.add_submenu_item("Transform","Transform")
-	SMenuObject.add_submenu_item("Scale","Scale")
+	S_menu_object.add_child(Ss_menu_trans) #
+	S_menu_object.add_child(Ss_menu_scale)
+	S_menu_object.add_child(Ss_menu_type)
+	S_menu_object.add_submenu_item("Transform","Transform")
+	S_menu_object.add_submenu_item("Scale","Scale")
 	#endregion
 	
 	#endregion
 	
 	#region VIEW
 	#region MODE
-	SMenuMode.set_name("Mode")
-	SMenuMode.add_item("Edit")
-	MenuView.get_popup().add_child(SMenuMode)
-	MenuView.get_popup().add_submenu_item("Mode","Mode")
+	S_menu_mode.set_name("Mode")
+	S_menu_mode.add_item("Edit")
+	Menu_view.get_popup().add_child(S_menu_mode)
+	Menu_view.get_popup().add_submenu_item("Mode","Mode")
 	
 	#region SPECTATE
-	SsMenuSpec.set_name("Spectate")
-	SsMenuSpec.add_item("Original")
-	SsMenuSpec.add_item("Astronomical Leap")
-	SMenuMode.add_child(SsMenuSpec)
-	SMenuMode.add_submenu_item("Spectate","Spectate")
+	Ss_menu_spec.set_name("Spectate")
+	Ss_menu_spec.add_item("Original")
+	Ss_menu_spec.add_item("Astronomical Leap")
+	S_menu_mode.add_child(Ss_menu_spec)
+	S_menu_mode.add_submenu_item("Spectate","Spectate")
 	#endregion
 	
 	#region SIMULATE
-	SsMenuSim.set_name("Simulate")
-	SsMenuSim.add_item("Original")
-	SsMenuSim.add_item("Astronomical Leap")
-	SMenuMode.add_child(SsMenuSim)
-	SMenuMode.add_submenu_item("Simulate","Simulate")
+	Ss_menu_sim.set_name("Simulate")
+	Ss_menu_sim.add_item("Original")
+	Ss_menu_sim.add_item("Astronomical Leap")
+	S_menu_mode.add_child(Ss_menu_sim)
+	S_menu_mode.add_submenu_item("Simulate","Simulate")
 	#endregion
 	#endregion
 	#endregion
