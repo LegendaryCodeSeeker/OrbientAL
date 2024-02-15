@@ -43,5 +43,5 @@ class Object_instancer:
 		return(Obj)
 
 class Object_eraser:
-	func _erase(mode, list, to_Erase):
+	func _erase(_Mode, _List, _To_erase):
 		pass
