@@ -8,7 +8,7 @@ class Object_instancer:
 		var Sig1
 		var Obj = MeshInstance3D.new()
 		var POS = Vector3(_Param[7],_Param[8],0)
-		var Size = (_Param[4] + 2) / 20.0 + 3
+		var Size = ((_Param[4]) / 25.0) +7.5
 		
 		#region 00x 0xx xxx
 		if(_Param[0] < 10):
@@ -37,11 +37,12 @@ class Object_instancer:
 		
 		Obj.set_name(OJID)
 		Obj.set_position(POS)
-		Sphere.set_radius(Size/3.0)
-		Sphere.set_height(Size/1.5)
+		Sphere.set_radius(Size/3.5)
+		Sphere.set_height(Size/1.75)
 		Obj.set_mesh(Sphere)
 		return(Obj)
 
 class Object_eraser:
-	func _erase(_Mode, _List, _To_erase):
-		pass
+	func _erase(_Mode, _Level, _To_erase):
+		if (_Mode == 0):#erase all
+			pass

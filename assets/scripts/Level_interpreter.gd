@@ -1,7 +1,7 @@
 extends Node
 
-func Find_Level_Type(dir):
-	var Level = FileAccess.open(dir, FileAccess.READ)
+func Find_Level_Type(_Dir):
+	var Level = FileAccess.open(_Dir, FileAccess.READ)
 	var LL = Level.get_length() % 16
 	
 	if (LL != 0):
@@ -12,10 +12,10 @@ func Find_Level_Type(dir):
 	Level.close()
 	
 	if (LL % 2 == 0):
-		Process_OLD(dir)
+		Process_OLD(_Dir)
 	else:
 		print("this is an astronomical leap level (WARNING not currently implamented)")
-		Process_ALLD(dir)
+		Process_ALLD(_Dir)
 
 func Process_OLD(_Dir):
 	
@@ -60,9 +60,8 @@ func Process_ALLD(_Dir):
 func Iterate_Objects(_Count, _Data, _IDT):
 	#breakpoint
 	var Obj
-	var Offset
 	var Parameters
-	var Instance = load("res://assets/scripts/Object_handler.gd")
+	var Scrpt = load("res://assets/scripts/Object_handler.gd")
 	
 	#region Object variables
 	var ID
@@ -81,8 +80,7 @@ func Iterate_Objects(_Count, _Data, _IDT):
 	print("iterating")
 	
 	for i in _Count:
-		Offset = 32*i
-		Obj = _Data.slice(32+Offset, 64+Offset)
+		Obj = _Data.slice(32+(32*i), 64+(32*i))
 		
 		#region SLICER
 		ID = Obj.slice(0, 1)
@@ -124,7 +122,7 @@ func Iterate_Objects(_Count, _Data, _IDT):
 		
 		Parameters = [ID,TYPE,OBID,STEP,SIZE,ANGLE,SPEED,APX,APY,RPX,RPY]
 		#breakpoint
-		$"..".add_child(Instance.Object_instancer._create(Parameters))
+		$"..".add_child(Scrpt.Object_instancer._create(Parameters))
 		
 		print("Object: ", i+1, "\n{\n Id: ", ID, "\n Type: ", TYPE, "\n Orbiting Id: ", OBID, "\n Orbit step: ", STEP, "\n Position: (x: ", APX, ", y: ", APY, ")\n Size: ", SIZE, "\n Angle: ", ANGLE, "\n Velocity: ", SPEED, "\n Orbiting position: (x: ", RPX, ", y: ", RPY, ")\n}\n")
 		

@@ -33,15 +33,15 @@ func _ready():
 	
 	#$MenuBar/HBoxContainer/Edit/Object.get_popup().connect("id_pressed", _on_Object_Smenu_Edit_pressed)
 
-func _on_File_item_pressed(id):
-	if id == 1:
+func _on_File_item_pressed(_Id):
+	if _Id == 1:
 		$MenuBar/HBoxContainer/File/Load.popup()
 		if (Godot == true): print("Load")
 		
-	elif id == 2:
+	elif _Id == 2:
 		$MenuBar/HBoxContainer/File/Save.popup()
 		if (Godot == true): print("Save")
-	elif id == 0:
+	elif _Id == 0:
 		$MenuBar/HBoxContainer/File/New.popup()
 		if (Godot == true): print("New")
 	else:
@@ -49,17 +49,17 @@ func _on_File_item_pressed(id):
 		get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
 		get_tree().quit()
 
-func _on_Edit_item_pressed(id):
-	if (Godot == true): print(id, " Edit Menu Child")
+func _on_Edit_item_pressed(_Id):
+	if (Godot == true): print(_Id, " Edit Menu Child")
 
-func _on_View_item_pressed(_id):
+func _on_View_item_pressed(_Id):
 	pass
 	
-func _on_Opt_item_pressed(_id):
+func _on_Opt_item_pressed(_Id):
 	pass
 	
-func _on_Object_Smenu_Edit_pressed(id):
-	if (Godot == true): print(id, " Edit/Object Menu Child")
+func _on_Object_Smenu_Edit_pressed(_Id):
+	if (Godot == true): print(_Id, " Edit/Object Menu Child")
 	
 func Menu_Bar():
 	
@@ -144,15 +144,21 @@ func Menu_Bar():
 	#endregion
 
 func Clear():
-	var Clear = load("res://assets/scripts/Object_handler.gd")
-	var Level_items = $"../../Level".get_children()
+	var Level = $"../../Level"
+	for i in Level.get_child_count():
+		if (i > 1):
+			Level.get_child(i).queue_free()
 	
-func _on_load_file_selected(path):
+func _on_load_file_selected(_Path):
 	Clear()
-	var level_Interpreter = preload("res://assets/scripts/Level_interpreter.gd")
-	var LI = level_Interpreter.new()
-	$"../../Level".add_child(LI)
-	var Level = LI.Find_Level_Type(path)
+	await get_tree().create_timer(1/1024).timeout #because old instance names are still being used and if i dont wait the new ones sometimes dont get a name.
+	
+	var level_Interpreter = load("res://assets/scripts/Level_interpreter.gd")
+	var Scrpt = level_Interpreter.new()
+	
+	$"../../Level".add_child(Scrpt)
+	var Level = Scrpt.Find_Level_Type(_Path)
+	
 	if (Level == 12):
 		$ErrorPop.popup()
 
