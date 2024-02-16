@@ -1,10 +1,9 @@
-Orbient(Astronomical Leap) Level Editor
+Orbient(Astronomical Leap) Level Editor Goals:
+  - saving loading and viewing levels for both Orbeint and my game Astronomical Leap
+  - learning godot so i can move development of Astronomical Leap to it
 
 Spectate mode goals:
   - shows all objects in there starting positions shaded as they would be in game and allows you to move a camera around the level
-	
-Simulation mode goals:
-  - bake (10-120)seconds of gameplay with 1 of 16 input files 1-8 pre-made 9-16 custom set
 
 Alpha 0.0.1
   - Saving/loading levels
@@ -48,7 +47,7 @@ Alpha 0.0.9
   - Add Defualt textures for editor
 
 Beta 0.1.0
-  - Begin Simulation implementation
+  - bug fix and finish hd models and textures (so nintendo cant sue me)
 
 Beta 0.2.0
   - Add warning messages for values that are too low and or invalid or cloned
