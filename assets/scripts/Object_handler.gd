@@ -8,7 +8,10 @@ class Object_instancer:
 		var Sig1
 		var Obj = MeshInstance3D.new()
 		var POS = Vector3(_Param[7],_Param[8],0)
-		var Size = ((_Param[4]) / 25.0) +7.5
+		var Size = _Param[4]
+		var scale = 0.0234375
+		var Sizer = Size*scale+2.5
+		var Sizeh = Size*(scale*2)+5
 		
 		#region 00x 0xx xxx
 		if(_Param[0] < 10):
@@ -37,8 +40,8 @@ class Object_instancer:
 		
 		Obj.set_name(OJID)
 		Obj.set_position(POS)
-		Sphere.set_radius(Size/3.5)
-		Sphere.set_height(Size/1.75)
+		Sphere.set_radius(Sizer*0.5)
+		Sphere.set_height(Sizeh*0.5)
 		Obj.set_mesh(Sphere)
 		return(Obj)
 

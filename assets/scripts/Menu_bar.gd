@@ -145,13 +145,13 @@ func Menu_Bar():
 
 func Clear():
 	var Level = $"../../Level"
+	#breakpoint
 	for i in Level.get_child_count():
 		if (i > 1):
-			Level.get_child(i).queue_free()
+			Level.get_child(2).free()
 	
 func _on_load_file_selected(_Path):
 	Clear()
-	await get_tree().create_timer(1/1024).timeout #because old instance names are still being used and if i dont wait the new ones sometimes dont get a name.
 	
 	var level_Interpreter = load("res://assets/scripts/Level_interpreter.gd")
 	var Scrpt = level_Interpreter.new()

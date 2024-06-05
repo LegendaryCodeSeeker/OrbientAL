@@ -124,6 +124,6 @@ func Iterate_Objects(_Count, _Data, _IDT):
 		#breakpoint
 		$"..".add_child(Scrpt.Object_instancer._create(Parameters))
 		
-		print("Object: ", i+1, "\n{\n Id: ", ID, "\n Type: ", TYPE, "\n Orbiting Id: ", OBID, "\n Orbit step: ", STEP, "\n Position: (x: ", APX, ", y: ", APY, ")\n Size: ", SIZE, "\n Angle: ", ANGLE, "\n Velocity: ", SPEED, "\n Orbiting position: (x: ", RPX, ", y: ", RPY, ")\n}\n")
+		print("Object: ", i+1, "\n{\n Id: ", ID, "\n Type: ", TYPE, "\n Orbiting Id: ", OBID, "\n Velocity Step: ", STEP, "\n Position: (x: ", APX, ", y: ", APY, ")\n Size: ", SIZE, "\n Angle: ", ANGLE, "\n Velocity: ", SPEED, "\n Orbiting position: (x: ", RPX, ", y: ", RPY, ")\n}\n")
 		
 
