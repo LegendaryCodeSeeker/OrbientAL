@@ -10,8 +10,8 @@ class Object_instancer:
 		var POS = Vector3(_Param[7],_Param[8],0)
 		var Size = _Param[4]
 		var scale = 0.0234375
-		var Sizer = Size*scale+2.5
-		var Sizeh = Size*(scale*2)+5
+		var Sizer = Size/2
+		var Sizeh = Size
 		
 		#region 00x 0xx xxx
 		if(_Param[0] < 10):
