@@ -124,7 +124,6 @@ func Iterate_Objects(_Count, _Data, _IDT):
 		RPX = RPX.decode_float(0)
 		RPY = RPY.decode_float(0)
 		#endregion
-		SIZE = (float(SIZE_FRA) + float(SIZE_INT))
 		Parameters = [ID,TYPE,OBID,STEP,SIZE,ANGLE,SPEED,APX,APY,RPX,RPY]
 		#breakpoint
 		$"..".add_child(Scrpt.Object_instancer._create(Parameters))
