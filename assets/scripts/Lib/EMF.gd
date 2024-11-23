@@ -2,17 +2,11 @@ class Round:
 	#region TO_MULTIPLE
 	
 	static func To_Multiple(_A, _B):#Rounds _A to a multiple of _B
-		var AI := (_A is int)
-		var AF := (_A is float)
-		var BI := (_B is int)
-		var BF := (_B is float)
-		var AIF := (AI or AF)
-		var BIF := (BI or BF)
-		if(not AIF or not BIF):
-			printerr("Input(s) NaN: ", int(AIF), int(BIF), "-", int(not AI), int(not AF), int(not BI), int(not BF), "\nEx. (AB-IFIF)\n0=PASS\n1=FAIL")
+		if (typeof(_A) != TYPE_INT || TYPE_FLOAT) or (typeof(_B) != TYPE_INT || TYPE_FLOAT):
+			printerr("Input(s) Not a number.\nExpected int or float but got:\n_A = ", typeof(_A), "\n_B = ", typeof(_B))
 			return ERR_INVALID_PARAMETER
 		else:
-			if (not(AF or BF)):
+			if typeof(_A) != TYPE_FLOAT or typeof(_B) != TYPE_FLOAT:
 				return(TM_Int(_A,_B))
 			else:
 				return(TM_Float(_A,_B))
