@@ -2,7 +2,7 @@ class Round:
 	#region TO_MULTIPLE
 	
 	static func To_Multiple(_A, _B):#Rounds _A to a multiple of _B
-		if (typeof(_A) != TYPE_INT || TYPE_FLOAT) or (typeof(_B) != TYPE_INT || TYPE_FLOAT):
+		if (typeof(_A) != TYPE_INT || not TYPE_FLOAT) or (typeof(_B) != TYPE_INT || not TYPE_FLOAT):
 			printerr("Input(s) Not a number.\nExpected int or float but got:\n_A = ", typeof(_A), "\n_B = ", typeof(_B))
 			return ERR_INVALID_PARAMETER
 		else:

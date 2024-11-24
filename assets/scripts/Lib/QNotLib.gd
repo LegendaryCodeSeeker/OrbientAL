@@ -1,12 +1,20 @@
-class QN: #QM.N M is integer bits, N is fractional bits. M+N = full word size
+class Q: #QM.N M is integer bits, N is fractional bits. M+N = full word size
 	
-	static func Decode(_Bytes, _N, _M):
-		var EMF = load("res://assets/scripts/Lib/EMF.gd").new()
+	static func Decode(_Bytes, _M, _N):
 		breakpoint
-		if typeof(_Bytes) != TYPE_INT || TYPE_FLOAT || TYPE_PACKED_BYTE_ARRAY:
-			printerr("Not a Valid Number Input.\nExpected One Of: TYPE_INT, TYPE_FLOAT, TYPE_PACKED_BYTE_ARRAY.\nGot '", typeof(_Bytes), "' Instead.")
+		
+		if typeof(_Bytes) == 29:
+			if (_Bytes.size())*8 == (_M + _N):
+				pass
+			else:
+				printerr("Incorrect Sizes Givin\nNumber: ", (_Bytes.size())*8, "\nM+N: ", (_M + _N))
+				return ERR_PARAMETER_RANGE_ERROR
+		else:
+			printerr("Non Valid Input.\nExpected: ", type_string(29),".\nGot '", type_string(typeof(_Bytes)), "' Instead.")
 			return ERR_INVALID_PARAMETER
-		print(typeof(_Bytes))
+			
+		
+		var EMF = load("res://assets/scripts/Lib/EMF.gd").new()
 		var INT_PART
 		var FRA_PART
 		var FRA_BYTE = _Bytes
