@@ -7,14 +7,13 @@ class Q: #QM.N M is integer bits, N is fractional bits. M+N = full word size
 			if (_Bytes.size())*8 == (_M + _N):
 				pass
 			else:
-				printerr("Incorrect Sizes Givin\nNumber: ", (_Bytes.size())*8, "\nM+N: ", (_M + _N))
+				printerr("Incorrect Bit Sizes Givin\nNumber Size: ", (_Bytes.size())*8, "\nM+N: ", (_M + _N))
 				return ERR_PARAMETER_RANGE_ERROR
 		else:
 			printerr("Non Valid Input.\nExpected: ", type_string(29),".\nGot '", type_string(typeof(_Bytes)), "' Instead.")
 			return ERR_INVALID_PARAMETER
 			
-		
-		var EMF = load("res://assets/scripts/Lib/EMF.gd").new()
+		 #TODO convert to binary and convert to SDF same distance float.
 		var INT_PART
 		var FRA_PART
 		var FRA_BYTE = _Bytes
