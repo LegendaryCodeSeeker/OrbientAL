@@ -14,16 +14,14 @@ class Q: #QM.N M is integer bits, N is fractional bits. M+N = full word size
 			return ERR_INVALID_PARAMETER
 			
 		 #TODO convert to binary and convert to SDF same distance float.
+		var BYTES = _Bytes.decode_s32(0)
+		#bytes to string binary
 		var INT_PART
 		var FRA_PART
-		var FRA_BYTE = _Bytes
-		var INT_BYTE = _Bytes
+		var FRA_BITS
+		var INT_BITS
 		
-		INT_PART = INT_BYTE >> _N #masking Fractional part to get Integer
-		for i in _N: #masking Integer part to get Fractional
-			FRA_BYTE = FRA_BYTE & 0b1
-			FRA_BYTE = FRA_BYTE >> 1
-		FRA_BYTE = FRA_BYTE << _N
+		
 		
 	
 	static func Encode(_N, _M, _S):
