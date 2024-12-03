@@ -15,6 +15,9 @@ class Q: #QM.N M is integer bits, N is fractional bits. M+N = full word size
 			
 		 #TODO convert to binary and convert to SDF same distance float.
 		var BYTES = _Bytes.decode_s32(0)
+		var HEX = String.num_int64(BYTES, 16)
+		var BITS = String.num_int64(BYTES, 2)
+		print(HEX,"\n",BYTES,"\n",BITS)
 		#bytes to string binary
 		var INT_PART
 		var FRA_PART

@@ -106,7 +106,7 @@ func Iterate_Objects(_Count, _Data, _IDT):
 		#region REVERSER
 		APX.reverse()
 		APY.reverse()
-		SIZE.reverse()
+		#SIZE.reverse()
 		ANGLE.reverse()
 		SPEED.reverse()
 		RPX.reverse()
