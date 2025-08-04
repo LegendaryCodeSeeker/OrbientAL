@@ -106,7 +106,7 @@ func Iterate_Objects(_Count, _Data, _IDT):
 		#region REVERSER
 		APX.reverse()
 		APY.reverse()
-		#SIZE.reverse()
+		SIZE.reverse()
 		ANGLE.reverse()
 		SPEED.reverse()
 		RPX.reverse()
@@ -120,7 +120,7 @@ func Iterate_Objects(_Count, _Data, _IDT):
 		STEP = STEP.decode_s8(0)
 		APX = APX.decode_float(0)
 		APY = APY.decode_float(0)
-		SIZE = QNL.Q.Decode(SIZE,28,4)
+		SIZE = SIZE.decode_float(0)
 		ANGLE = ANGLE.decode_float(0)
 		SPEED = SPEED.decode_float(0)
 		RPX = RPX.decode_float(0)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://nakghjpyqj8t"]
 
-[ext_resource type="Script" path="res://assets/scripts/Menu_bar.gd" id="1_id0nx"]
+[ext_resource type="Script" uid="uid://cbi7epacpl5vp" path="res://assets/scripts/Menu_bar.gd" id="1_id0nx"]
 
 [sub_resource type="Environment" id="Environment_fch18"]
 background_mode = 1
@@ -44,6 +44,7 @@ text = "File"
 switch_on_hover = true
 item_count = 4
 popup/item_0/text = "New"
+popup/item_0/id = 0
 popup/item_1/text = "Load"
 popup/item_1/id = 1
 popup/item_2/text = "Save"
@@ -66,7 +67,6 @@ filters = PackedStringArray("*.bin", "*.bak")
 title = "Save Level"
 initial_position = 1
 size = Vector2i(720, 480)
-ok_button_text = "Save"
 cancel_button_text = "Nevermind"
 access = 2
 
@@ -88,6 +88,7 @@ text = "Edit"
 switch_on_hover = true
 item_count = 6
 popup/item_0/text = "Undo"
+popup/item_0/id = 0
 popup/item_0/disabled = true
 popup/item_1/text = "Redo"
 popup/item_1/id = 1
@@ -112,6 +113,7 @@ item_count = 4
 popup/item_0/text = "Show Barycenters"
 popup/item_0/checkable = 1
 popup/item_0/checked = true
+popup/item_0/id = 0
 popup/item_1/text = "Show Angles And Velocities"
 popup/item_1/checkable = 1
 popup/item_1/id = 1
