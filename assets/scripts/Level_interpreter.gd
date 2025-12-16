@@ -1,7 +1,5 @@
 extends Node
 
-var QNL = load("res://assets/scripts/Lib/QNotLib.gd").new()
-
 func Find_Level_Type(_Dir):
 	var Level = FileAccess.open(_Dir, FileAccess.READ)
 	var LL = Level.get_length() % 16
@@ -76,8 +74,6 @@ func Iterate_Objects(_Count, _Data, _IDT):
 	var RPX
 	var RPY
 	var SIZE
-	var SIZE_INT
-	var SIZE_FRA
 	var ANGLE
 	var SPEED
 	var STEP

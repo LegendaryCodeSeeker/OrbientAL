@@ -1,6 +1,5 @@
 class Object_instancer:
-	
-	#parameters = [ID,TYPE,OBID,STEP,SIZE,ANGLE,SPEED,APX,APY,RPX,RPY]
+	 
 	
 	static func _create(_Param):
 		var Sphere = SphereMesh.new()

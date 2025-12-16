@@ -9,37 +9,26 @@ ambient_light_energy = 5.76
 
 [node name="3D space" type="Node3D"]
 
-[node name="GUI" type="CanvasLayer" parent="."]
-follow_viewport_enabled = true
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="3D" type="Control" parent="GUI"]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="2D" type="Control" parent="GUI"]
+[node name="2D_GUI" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_id0nx")
 
-[node name="MenuBar" type="MenuBar" parent="GUI/2D"]
+[node name="MenuBar" type="MenuBar" parent="CanvasLayer/2D_GUI"]
 custom_minimum_size = Vector2(96, 32)
 layout_mode = 0
 offset_right = 96.0
 offset_bottom = 40.0
 tooltip_text = "File"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="GUI/2D/MenuBar"]
+[node name="File" type="MenuButton" parent="CanvasLayer/2D_GUI/MenuBar"]
 layout_mode = 0
-offset_right = 40.0
+offset_right = 35.0
 offset_bottom = 40.0
-
-[node name="File" type="MenuButton" parent="GUI/2D/MenuBar/HBoxContainer"]
-layout_mode = 2
 text = "File"
 switch_on_hover = true
 item_count = 4
@@ -52,7 +41,7 @@ popup/item_2/id = 2
 popup/item_3/text = "Quit"
 popup/item_3/id = 3
 
-[node name="Load" type="FileDialog" parent="GUI/2D/MenuBar/HBoxContainer/File"]
+[node name="Load" type="FileDialog" parent="CanvasLayer/2D_GUI/MenuBar/File"]
 title = "Load Level"
 initial_position = 1
 size = Vector2i(720, 480)
@@ -63,27 +52,29 @@ file_mode = 0
 root_subfolder = "res://Levels"
 filters = PackedStringArray("*.bin", "*.bak")
 
-[node name="Save" type="FileDialog" parent="GUI/2D/MenuBar/HBoxContainer/File"]
+[node name="Save" type="FileDialog" parent="CanvasLayer/2D_GUI/MenuBar/File"]
 title = "Save Level"
 initial_position = 1
 size = Vector2i(720, 480)
 cancel_button_text = "Nevermind"
 access = 2
 
-[node name="New" type="ConfirmationDialog" parent="GUI/2D/MenuBar/HBoxContainer/File"]
+[node name="New" type="ConfirmationDialog" parent="CanvasLayer/2D_GUI/MenuBar/File"]
 title = "New Level?"
 initial_position = 1
 size = Vector2i(647, 80)
 cancel_button_text = "Nevermind"
 
-[node name="Label" type="Label" parent="GUI/2D/MenuBar/HBoxContainer/File/New"]
+[node name="Label" type="Label" parent="CanvasLayer/2D_GUI/MenuBar/File/New"]
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Are you sure you want to make a new level? (Any progressed not saved will be lost)"
 horizontal_alignment = 1
 
-[node name="Edit" type="MenuButton" parent="GUI/2D/MenuBar/HBoxContainer"]
-layout_mode = 2
+[node name="Edit" type="MenuButton" parent="CanvasLayer/2D_GUI/MenuBar"]
+layout_mode = 0
+offset_right = 38.0
+offset_bottom = 40.0
 text = "Edit"
 switch_on_hover = true
 item_count = 6
@@ -104,8 +95,10 @@ popup/item_4/id = 4
 popup/item_5/text = "Delete"
 popup/item_5/id = 5
 
-[node name="View" type="MenuButton" parent="GUI/2D/MenuBar/HBoxContainer"]
-layout_mode = 2
+[node name="View" type="MenuButton" parent="CanvasLayer/2D_GUI/MenuBar"]
+layout_mode = 0
+offset_right = 45.0
+offset_bottom = 40.0
 disabled = true
 text = "View"
 switch_on_hover = true
@@ -126,17 +119,26 @@ popup/item_3/checkable = 1
 popup/item_3/checked = true
 popup/item_3/id = 3
 
-[node name="Options" type="MenuButton" parent="GUI/2D/MenuBar/HBoxContainer"]
-layout_mode = 2
+[node name="Options" type="MenuButton" parent="CanvasLayer/2D_GUI/MenuBar"]
+layout_mode = 0
+offset_right = 70.0
+offset_bottom = 40.0
 disabled = true
 text = "Options"
 switch_on_hover = true
 
-[node name="ErrorPop" type="AcceptDialog" parent="GUI/2D"]
+[node name="ErrorPop" type="AcceptDialog" parent="CanvasLayer/2D_GUI"]
 title = "Error Loading File"
 initial_position = 2
 unresizable = true
 dialog_text = "This is not an Orbient or Astronomical Leap level file."
+
+[node name="3D_GUI" type="Control" parent="CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="Level" type="Marker3D" parent="."]
 process_mode = 3
@@ -152,5 +154,5 @@ near = 0.001
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Level"]
 transform = Transform3D(0.454006, -0.539056, 0.709434, 0, 0.796224, 0.605002, -0.890999, -0.274675, 0.36149, 0, 2.17467, 0)
 
-[connection signal="file_selected" from="GUI/2D/MenuBar/HBoxContainer/File/Load" to="GUI/2D" method="_on_load_file_selected"]
-[connection signal="confirmed" from="GUI/2D/MenuBar/HBoxContainer/File/New" to="GUI/2D" method="_on_new_confirmed"]
+[connection signal="file_selected" from="CanvasLayer/2D_GUI/MenuBar/File/Load" to="CanvasLayer/2D_GUI" method="_on_load_file_selected"]
+[connection signal="confirmed" from="CanvasLayer/2D_GUI/MenuBar/File/New" to="CanvasLayer/2D_GUI" method="_on_new_confirmed"]

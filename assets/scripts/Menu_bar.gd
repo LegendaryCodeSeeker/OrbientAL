@@ -1,10 +1,6 @@
 extends Control
 # Called when the node enters the scene tree for the first time.
 
-#region VARIABLES
-@onready var Godot = true #debugging var
-#endregion
-
 #region .NEW()
 @onready var S_menu_object = PopupMenu.new()
 @onready var Ss_menu_trans = PopupMenu.new()
@@ -16,10 +12,10 @@ extends Control
 #endregion
 
 #region SHORTPATH
-@onready var Menu_file = $MenuBar/HBoxContainer/File
-@onready var Menu_edit = $MenuBar/HBoxContainer/Edit
-@onready var Menu_view = $MenuBar/HBoxContainer/View
-@onready var Menu_options = $MenuBar/HBoxContainer/Options
+@onready var Menu_file = $Separator/Btn_File
+@onready var Menu_edit = $Separator/Btn_Edit
+@onready var Menu_view = $Separator/Btn_View
+@onready var Menu_options = $Separator/Btn_Options
 #endregion
 
 func _ready():
@@ -35,22 +31,22 @@ func _ready():
 
 func _on_File_item_pressed(_Id):
 	if _Id == 1:
-		$MenuBar/HBoxContainer/File/Load.popup()
-		if (Godot == true): print("Load")
+		$Btn_File/Dal_Load.popup()
+		if (GVars.Godot == true): print("Load")
 		
 	elif _Id == 2:
-		$MenuBar/HBoxContainer/File/Save.popup()
-		if (Godot == true): print("Save")
+		$Btn_File/Dal_Save.popup()
+		if (GVars.Godot == true): print("Save")
 	elif _Id == 0:
-		$MenuBar/HBoxContainer/File/New.popup()
-		if (Godot == true): print("New")
+		$Btn_File/Dal_New.popup()
+		if (GVars.Godot == true): print("New")
 	else:
-		if (Godot == true): print("WEEEEEEEEEEEEE")
+		if (GVars.Godot == true): print("WEEEEEEEEEEEEE")
 		get_tree().root.propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
 		get_tree().quit()
 
 func _on_Edit_item_pressed(_Id):
-	if (Godot == true): print(_Id, " Edit Menu Child")
+	if (GVars.Godot == true): print(_Id, " Edit Menu Child")
 
 func _on_View_item_pressed(_Id):
 	pass
@@ -59,7 +55,7 @@ func _on_Opt_item_pressed(_Id):
 	pass
 	
 func _on_Object_Smenu_Edit_pressed(_Id):
-	if (Godot == true): print(_Id, " Edit/Object Menu Child")
+	if (GVars.Godot == true): print(_Id, " Edit/Object Menu Child")
 	
 func Menu_Bar():
 	
@@ -142,25 +138,18 @@ func Menu_Bar():
 	#endregion
 	#endregion
 	#endregion
-
-func Clear():
-	var Level = $"../../Level"
-	#breakpoint
-	for i in Level.get_child_count():
-		if (i > 1):
-			Level.get_child(2).free()
 	
 func _on_load_file_selected(_Path):
-	Clear()
+	GFuncs.Clear_Level_Objects($"../../../Level")
 	
 	var level_Interpreter = load("res://assets/scripts/Level_interpreter.gd")
 	var Scrpt = level_Interpreter.new()
 	
-	$"../../Level".add_child(Scrpt)
+	$"../../../Level".add_child(Scrpt)
 	var Level = Scrpt.Find_Level_Type(_Path)
 	
 	if (Level == 12):
 		$ErrorPop.popup()
 
 func _on_new_confirmed():
-	Clear()
+	GFuncs.Clear_Level_Objects($"../../../Level")
