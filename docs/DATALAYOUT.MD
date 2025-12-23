@@ -21,15 +21,15 @@ Orbient:
 		06 - Black Hole
 	next byte: Orbit Target ID (unsigned int)
 	next byte: Orbit Step (signed int)
-	next 4 bytes: X Position Not Orbiting (float)
-	next 4 bytes: Y Position Not Orbiting (float)
+	next 4 bytes: X Position (float)
+	next 4 bytes: Y Position (float)
 	next 4 bytes: Size (float)
 		Size calculated like this?:
 			Floor(Size/25.0)
 	next 4 bytes: Angle (float)
 	next 4 bytes: Velocity (float)
-	next 4 bytes: X Position Orbiting? (float)
-	next 4 bytes: Y Position Orbiting? (float)
+	next 4 bytes: ??? (float?)
+	next 4 bytes: ??? (float?)
 	
 Astronomical Leap:
 	TBD
