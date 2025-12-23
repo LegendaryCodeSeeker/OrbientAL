@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b6uo7i2ageggs"]
 
-[ext_resource type="Script" uid="uid://pk1m5550amwu" path="res://assets/scripts/Lib/ETFC.gd" id="1_41gyg"]
+[ext_resource type="Script" uid="uid://pk1m5550amwu" path="res://assets/scripts/Lib/LEC.gd" id="1_41gyg"]
 
 [node name="2D_GUI" type="Control"]
 layout_mode = 3
